@@ -4,34 +4,32 @@
 elgg.provide("elgg.lazy_hover");
 
 elgg.lazy_hover.init = function(){
-	$(".elgg-avatar > .elgg-icon-hover-menu").live('click', function(event) {
-		$button = $(this);
-		$placeholder = $(this).parent().find(".lazy-hover-placeholder");
-		if($placeholder.length) {
+	$(".elgg-avatar > .elgg-icon-hover-menu").on('click', function() {
+		var $placeholder = $(this).parent().find(".elgg-menu-hover.elgg-ajax-loader");
+		if ($placeholder.length > 0) {
+			var md5 = $placeholder.attr('rel');
 			// select all similar placeholders
-			$all_placeholders = $(".lazy-hover-placeholder[rel='" + $placeholder.attr("rel") + "']");
+			var $all_placeholders = $(".elgg-menu-hover[rel='" + md5 + "']");
+			var action = elgg.get_site_url() + 'lazy_hover';
+			var data = $placeholder.data('lazy-hover');
 
-			// find first form for this menu
-			$form = $all_placeholders.find("form:first");
-			if ($form.length) {
-				action = $form.attr("action");
-				data = $form.serializeArray();
+			elgg.get(action, {
+				data: data,
+				success: function(data) {
+					if (data) {
+						// replace all existing placeholders with new menu
+						$all_placeholders.removeClass('elgg-ajax-loader pvl')
+							.html($(data).children());
 
-				elgg.get(action, {
-					data: data,
-					success: function(data) {
-						if (data) {
-							// replace all existing placeholders with new menu
-							$all_placeholders.replaceWith(data);
-
-							// restart click events
-							$button.click();
+						// show the new menu in the popup
+						var $popup = $('.elgg-menu-hover:visible');
+						if ($popup.attr('rel') === md5) {
+							$popup.removeClass('elgg-ajax-loader pvl')
+								.html($(data).children());
 						}
 					}
-				});
-			}
-			// prevent other events
-			event.stopImmediatePropagation();
+				}
+			});
 		}
 	});
 };
