@@ -11,7 +11,7 @@ elgg.lazy_hover.init = function(){
 			// select all similar placeholders
 			var $all_placeholders = $(".elgg-menu-hover[rel='" + md5 + "']");
 			var action = elgg.get_site_url() + 'ajax/view/lazy_hover/user_hover';
-			var data = $placeholder.data('lazy-hover');
+			var data = $all_placeholders.filter('[data-lazy-hover]').data('lazy-hover');
 
 			elgg.get(action, {
 				data: data,
