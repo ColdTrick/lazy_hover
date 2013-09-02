@@ -4,7 +4,7 @@
 elgg.provide("elgg.lazy_hover");
 
 elgg.lazy_hover.init = function(){
-	$(".elgg-avatar > .elgg-icon-hover-menu").on('click', function() {
+	$(".elgg-avatar > .elgg-icon-hover-menu").live('click', function() {
 		var $placeholder = $(this).parent().find(".elgg-menu-hover.elgg-ajax-loader");
 		if ($placeholder.length > 0) {
 			var md5 = $placeholder.attr('rel');
