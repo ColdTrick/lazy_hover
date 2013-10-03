@@ -29,7 +29,7 @@ function lazy_hover_init() {
 function lazy_hover_public_pages($hook_name, $entity_type, $return_value, $params) {
 	$return = $return_value;
 	if (is_array($return)) {
-		$return[] = "lazy_hover";
+		$return[] = "ajax/view/lazy_hover.*";
 	}
 	return $return;
 }
