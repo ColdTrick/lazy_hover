@@ -6,7 +6,7 @@
 	<description>Lazy loads the Elgg user hover menu </description>
 	<website>http://www.coldtrick.com/</website>
 	<copyright>(C) ColdTrick IT Solutions 2009 - 2013</copyright>
-	<license>GNU Public License version 2</license>
+	<license>GNU Public License version 2 or MIT License</license>
 	
 	<requires>
 		<type>elgg_release</type>
