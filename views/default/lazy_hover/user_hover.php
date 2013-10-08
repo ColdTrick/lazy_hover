@@ -5,9 +5,10 @@ $guid = (int)get_input("g", 0, false);
 $page_owner_guid = (int)get_input("pog", 0, false);
 $contexts = (array)get_input("c", array(), false);
 $mac = get_input('m', '', false);
+$input = (array) get_input("i", array(), false);
 
 // verify MAC
-$data = serialize(array($guid, $page_owner_guid, $contexts));
+$data = serialize(array($guid, $page_owner_guid, $contexts, $input));
 if ($mac !== hash_hmac('sha256', $data, get_site_secret())) {
 	return;
 }
@@ -26,6 +27,8 @@ if ($page_owner_guid) {
 foreach ($contexts as $context) {
 	elgg_push_context($context);
 }
+
+elgg_set_config("input", $input);
 
 $params = array(
 	'entity' => $user,

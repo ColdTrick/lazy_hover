@@ -7,12 +7,13 @@ if (!elgg_instanceof($user, 'user')) {
 	return;
 }
 
-$guid = (int)$user->guid;
-$page_owner_guid = (int)elgg_get_page_owner_guid();
-$contexts = (array)elgg_get_config("context");
+$guid = (int) $user->guid;
+$page_owner_guid = (int) elgg_get_page_owner_guid();
+$contexts = (array) elgg_get_config("context");
+$input = (array) elgg_get_config("input");
 
 // generate MAC so we don't have to trust the client's choice of contexts
-$data = serialize(array($guid, $page_owner_guid, $contexts));
+$data = serialize(array($guid, $page_owner_guid, $contexts, $input));
 $mac = hash_hmac('sha256', $data, get_site_secret());
 
 $attrs = array(
@@ -26,6 +27,7 @@ if (empty($menus_present[$mac])) {
 		'pog' => $page_owner_guid,
 		'c' => $contexts,
 		'm' => $mac,
+		'i' => $input
 	));
 
 	$menus_present[$mac] = true;
