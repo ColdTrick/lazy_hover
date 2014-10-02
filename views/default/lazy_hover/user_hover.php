@@ -1,15 +1,15 @@
 <?php
 
 // g = guid, pog = page_owner_guid, c = contexts, m = mac
-$guid = (int)get_input("g", 0, false);
-$page_owner_guid = (int)get_input("pog", 0, false);
-$contexts = (array)get_input("c", array(), false);
-$mac = get_input('m', '', false);
+$guid = (int) get_input("g", 0, false);
+$page_owner_guid = (int) get_input("pog", 0, false);
+$contexts = (array) get_input("c", array(), false);
+$mac = get_input("m", "", false);
 $input = (array) get_input("i", array(), false);
 
 // verify MAC
 $data = serialize(array($guid, $page_owner_guid, $contexts, $input));
-if ($mac !== hash_hmac('sha256', $data, get_site_secret())) {
+if ($mac !== hash_hmac("sha256", $data, get_site_secret())) {
 	return;
 }
 
@@ -31,12 +31,12 @@ foreach ($contexts as $context) {
 elgg_set_config("input", $input);
 
 $params = array(
-	'entity' => $user,
-	'username' => $user->username,
-	'name' => $user->name
+	"entity" => $user,
+	"username" => $user->username,
+	"name" => $user->name
 );
 
-echo elgg_view_menu('user_hover', $params);
+echo elgg_view_menu("user_hover", $params);
 
 // revert extra contexts
 foreach ($contexts as $context) {
