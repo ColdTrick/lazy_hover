@@ -3,6 +3,7 @@
 	<name>Lazy Hover</name>
 	<author>ColdTrick IT Solutions</author>
 	<version>1.0</version>
+	<id>lazy_hover</id>
 	<description>Lazy loads the Elgg user hover menu </description>
 	<website>http://www.coldtrick.com/</website>
 	<copyright>(C) ColdTrick IT Solutions 2013 - 2014</copyright>
