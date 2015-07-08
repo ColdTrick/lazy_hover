@@ -1,3 +1,7 @@
+DEPRECATED!
+==========
+This plugin is out of date and should no longer be used. Elgg now provides this functionality in core.
+
 Lazy Hover
 =============
 Lazy loads the Elgg user hover menu. 
